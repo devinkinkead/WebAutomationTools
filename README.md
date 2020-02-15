@@ -9,7 +9,7 @@ sudo apt-get install chromium-chromedriver
 
 
 The following code is currently designed for linux only:
-os.clear('clear')
+os.system('clear')
 --and--
 browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
 
