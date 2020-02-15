@@ -1,7 +1,6 @@
 from selenium import webdriver
 import selenium.common.exceptions as seleniumError
 from selenium.webdriver.common.keys import Keys
-import urllib3.exceptions as urlError
 import http.client
 import time
 
