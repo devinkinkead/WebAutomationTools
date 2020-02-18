@@ -21,14 +21,15 @@ def yahoo(user, password, minutes=3):
 
     entries.append(user)
     entries.append(password)
-
+    # TODO Exception Handling for webdriver
     browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
-
+    # TODO Exception handling for browser. Known exceptions: RemoteDisconnected
     # Time program will wait for applicable web elements to appear - in seconds
     browser.implicitly_wait(10)
     browser.get('https://login.yahoo.com/config/login?.src=fpctx&.intl=us&.lang=en-US&.done=https://www.yahoo.com')
     count = 0
     element = elements[0]
+    # TODO Exception handling for element. Known exception: NoSuchElementException
     elem = browser.find_element_by_id(element)
     elem.send_keys(entries[count])
     elem.send_keys(Keys.ENTER)
@@ -36,15 +37,17 @@ def yahoo(user, password, minutes=3):
     # Password Field
     element = elements[1]
     counter = 0
-    while counter < 3:
-        counter += 1
-        try:
-            browser.get(browser.current_url)
-        except http.client.RemoteDisconnected:
-            print('Password Connection Fail')
-        else:
-            break;
-
+    # while counter < 3:
+    #     counter += 1
+    #     try:
+    #         browser.get(browser.current_url)
+    #     except http.client.RemoteDisconnected:
+    #         print('Password Connection Fail')
+    #
+    #     else:
+    #
+    #         break;
+    # TODO Exception Handling: Nosuchelement, Remotedisconnected?
     elem = browser.find_element_by_name(element)
     count += 1
     elem.send_keys(entries[count])
@@ -58,15 +61,17 @@ def yahoo(user, password, minutes=3):
             browser.get('https://mail.yahoo.com/?.src=fp')
         except http.client.RemoteDisconnected:
             print('Connection Failed. Trying again...')
+            #TODO Breaking loop if 3 attempts
         else:
+            # TODO: Add remaining code instead of break
             break;
 
-    checkboxcssselector = '.c27KHO0_n.b_0.M_0.i_0.I_T.y_Z2uhb3X.A_6EqO.r_P.C_q.cvhIH6_T.ir3_Z1FS2Mn.P_0'
+    checkboxcssselector = '[data-test-id="checkbox"]'
     try:
         # Checkbox for Select All Emails
         elem = browser.find_element_by_css_selector(checkboxcssselector)
     except seleniumError.NoSuchElementException:
-        print('Checkbox Not Found. Likely due to Invalid Credentials. Closing Program...')
+        print('Checkbox Not Found. Either due to Invalid Credentials or No Emails in Inbox. Closing Program...')
     else:
         endTime = time.time() + 60 * minutes
         while time.time() < endTime:
