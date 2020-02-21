@@ -13,6 +13,9 @@ def menu():
         print(f'{"Yahoo Email Credentials":*^30}')
         print('')
         user = input('What is your username?: ')
+        # Use input ONLY if not running on non-terminal.
+        # password = input('What is your password')
+        # getpass protects password import on a terminal
         password = getpass.getpass('What is your password?: ')
         minutes = input('How many minutes to run program?: ')
         os.system('clear')
