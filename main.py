@@ -1,5 +1,6 @@
 import EmailDeleter
 import os
+import getpass
 
 
 def menu():
@@ -12,7 +13,7 @@ def menu():
         print(f'{"Yahoo Email Credentials":*^30}')
         print('')
         user = input('What is your username?: ')
-        password = input('What is your password?: ')
+        password = getpass.getpass('What is your password?: ')
         minutes = input('How many minutes to run program?: ')
         os.system('clear')
         try:
