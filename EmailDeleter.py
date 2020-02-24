@@ -80,5 +80,8 @@ def yahoo(user, password, minutes=3):
                 elem.send_keys(Keys.DELETE)
             except seleniumError.ElementClickInterceptedException:
                 print('Waiting on Checkbox to reappear...')
+            except seleniumError.StaleElementReferenceException:
+                print('Element not attached to page document. Trying again...')
+
 
 
