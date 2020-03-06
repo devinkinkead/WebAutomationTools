@@ -80,6 +80,8 @@ def yahoo(user, password, minutes=3):
                 elem.send_keys(Keys.DELETE)
             except seleniumError.ElementClickInterceptedException:
                 print('Waiting on Checkbox to reappear...')
+                # TODO - Continually Throws this if inbox is emptied until the desired end time. Update to
+                # stop if it throws for more than ~5-10 seconds
             except seleniumError.StaleElementReferenceException:
                 print('Element not attached to page document. Trying again...')
 
