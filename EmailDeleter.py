@@ -74,14 +74,16 @@ def yahoo(user, password, minutes=3):
         print('Checkbox Not Found. Either due to Invalid Credentials or No Emails in Inbox. Closing Program...')
     else:
         endTime = time.time() + 60 * minutes
-        while time.time() < endTime:
+        count = 0
+        while time.time() < endTime and count < 10:
             try:
                 elem.click()
                 elem.send_keys(Keys.DELETE)
+
             except seleniumError.ElementClickInterceptedException:
                 print('Waiting on Checkbox to reappear...')
             except seleniumError.StaleElementReferenceException:
                 print('Element not attached to page document. Trying again...')
-
+                count += 1
 
 
